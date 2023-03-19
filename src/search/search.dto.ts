@@ -3,3 +3,7 @@ export class SearchDto {
     destinationAddress: string;
     distance?: number;
 }
+
+export class CreateSearchDto {
+    distance?: number;
+}

@@ -1,4 +1,4 @@
-import { BadRequestException } from '@nestjs/common';
+import { GeoreferenceGatewayService } from '../../../src/georeference-gateway/georeference-gateway.service';
 import { SearchController } from '../../../src/search/search.controller';
 import { SearchService } from '../../../src/search/search.service';
 
@@ -7,7 +7,7 @@ describe('SearchController', () => {
   let searchService: SearchService;
 
   beforeEach(() => {
-    searchService = new SearchService();
+    searchService = new SearchService(new GeoreferenceGatewayService());
     searchController = new SearchController(searchService);
   });
 
@@ -22,7 +22,7 @@ describe('SearchController', () => {
     });
 
     it('should throw error', async () => {
-      jest.spyOn(searchService, 'calculateDistance').mockImplementation(() => Promise.reject());
+      jest.spyOn(searchService, 'calculateDistance').mockImplementation(() => Promise.resolve(undefined));
       await expect(searchController.createSearch()).rejects.toThrow();
     });
   });

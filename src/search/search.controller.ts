@@ -1,10 +1,6 @@
 import { BadRequestException, Controller, Get, Post } from '@nestjs/common';
-import { SearchDto } from './search.dto';
+import { CreateSearchDto, SearchDto } from './search.dto';
 import { SearchService } from './search.service';
-
-class CreateSearchDto {
-    distance?: number;
-}
 
 @Controller('search')
 export class SearchController {
@@ -12,15 +8,12 @@ export class SearchController {
 
   @Post()
   async createSearch(): Promise<CreateSearchDto> {
-    try {
-        const distance = await this.searchService.calculateDistance('', '');
-        return { distance };
-    } catch(e) {
-        console.log('olae')
-        throw new BadRequestException('Something bad happened', { 
-            cause: new Error(), description: 'Some error description' 
-        });
+    const distance = await this.searchService.calculateDistance('', '');
+
+    if (distance) {
+      return { distance };
     }
+    throw new BadRequestException('Error on calculating distance');
   }
 
   @Get()
