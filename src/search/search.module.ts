@@ -1,16 +1,16 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { GeoreferenceGatewayModule } from 'src/georeference-gateway/georeference-gateway.module';
 import { SearchDomainService } from './search.domain.service';
 import { DistanceCalculatorService } from './distance-calcualator.service';
-import { Search, SearchSchema } from './schemas/search.schema';
 import { SearchController } from './search.controller';
-import { SearchService } from './search.service';
+import { SearchService } from './entity/search.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Search } from './entity/search.entity';
 
 @Module({
   imports: [
     GeoreferenceGatewayModule,
-    MongooseModule.forFeature([{ name: Search.name, schema: SearchSchema }])
+    TypeOrmModule.forFeature([Search]),
   ],
   controllers: [SearchController],
   providers: [SearchDomainService, SearchService, DistanceCalculatorService],
