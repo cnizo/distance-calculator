@@ -1,31 +1,26 @@
-import { Injectable } from '@nestjs/common';
-import { GeoreferenceGatewayService } from '../georeference-gateway/georeference-gateway.service';
+import { Model } from 'mongoose';
+import { Injectable, Logger } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Search, SearchDocument } from './schemas/search.schema';
 import { SearchDto } from './search.dto';
-import { getDistance } from 'geolib';
 
 @Injectable()
 export class SearchService {
-  constructor(private georeferenceGatewayService: GeoreferenceGatewayService) {}
+  constructor(@InjectModel(Search.name) private searchModel: Model<SearchDocument>) {}
 
-  async calculateDistance(source: string, destination: string): Promise<number | undefined> {
-    const sourceGeoPoint = await this.georeferenceGatewayService.getGeoReferencing(source);
-    const destinationGeoPoint = await this.georeferenceGatewayService.getGeoReferencing(destination);
-    let distanceInKm;
+  async createSearch(search: SearchDto): Promise<Search | undefined> {
+    const searchDomainToSearch = {...search};
+    const createOperation = new this.searchModel(searchDomainToSearch);
     try {
-      if (sourceGeoPoint && destinationGeoPoint) {
-        distanceInKm = getDistance(sourceGeoPoint, destinationGeoPoint) / 1000;
-      }
+      return await createOperation.save();
     } catch (e) {
-      console.log('Error to calculate distance');
+      Logger.error('Error on saving new search to db', e)
+      return;
     }
-    return distanceInKm;
   }
 
-  async saveSearch(): Promise<void> {
+  async findAll(): Promise<SearchDto[]> {
 
-  }
-
-  async findAllSearches(): Promise<SearchDto[]> {
     return [];
   }
 }

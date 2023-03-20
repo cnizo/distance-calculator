@@ -1,14 +1,21 @@
-import { BadRequestException, Controller, Get, Post } from '@nestjs/common';
-import { CreateSearchDto, SearchDto } from './search.dto';
-import { SearchService } from './search.service';
+import { BadRequestException, Body, Controller, Get, Post } from '@nestjs/common';
+import { CreateSearchRequestDto, CreateSearchResponseDto, SearchDto } from './search.dto';
+import { SearchDomainService } from './search.domain.service';
 
 @Controller('search')
 export class SearchController {
-  constructor(private readonly searchService: SearchService) {}
+  constructor(private readonly searchDomainService: SearchDomainService) {}
 
   @Post()
-  async createSearch(): Promise<CreateSearchDto> {
-    const distance = await this.searchService.calculateDistance('', '');
+  async createSearch(@Body() createSearchDto: CreateSearchRequestDto): Promise<CreateSearchResponseDto> {
+    if (!createSearchDto.sourceAddress || !createSearchDto.destinationAddress) {
+      throw new BadRequestException('Both source and destination data should be provided');
+    }
+
+    const distance = await this.searchDomainService.createSearch(
+      createSearchDto.sourceAddress,
+      createSearchDto.destinationAddress
+    );
 
     if (distance) {
       return { distance };
@@ -18,6 +25,6 @@ export class SearchController {
 
   @Get()
   async getSearchHistory(): Promise<SearchDto[]> {
-    return this.searchService.findAllSearches();
+    return;
   }
 }
