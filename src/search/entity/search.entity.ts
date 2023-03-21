@@ -9,13 +9,13 @@ export class Search {
     type: 'varchar',
     length: 100
   })
-  sourceAddress: string;
+  source: string;
 
   @Column({
     type: 'varchar',
     length: 100
   })
-  destinationAddress: string;
+  destination: string;
 
   @Column({ nullable: true })
   distance!: number;

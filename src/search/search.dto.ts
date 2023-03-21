@@ -1,12 +1,12 @@
 export class SearchDto {
-  sourceAddress: string;
-  destinationAddress: string;
+  source: string;
+  destination: string;
   distance?: number;
 }
 
 export class CreateSearchRequestDto {
-  sourceAddress: string;
-  destinationAddress: string;
+  source: string;
+  destination: string;
 }
 
 export class CreateSearchResponseDto {

@@ -2,21 +2,24 @@ import { SearchDomainService } from '../../../src/search/search.domain.service';
 import { DistanceCalculatorService } from '../../../src/search/distance-calcualator.service';
 import { GeoreferenceGatewayService } from '../../../src/georeference-gateway/georeference-gateway.service';
 import { SearchController } from '../../../src/search/search.controller';
+import { SearchService } from '../../../src/search/entity/search.service';
 
 describe('SearchController', () => {
   let searchController: SearchController;
   let searchDomainService: SearchDomainService;
+  let searchService: SearchService;
 
   beforeEach(() => {
     const distanceCalculatorService = new DistanceCalculatorService(new GeoreferenceGatewayService());
-    searchDomainService = new SearchDomainService(distanceCalculatorService);
+    searchService = new SearchService();
+    searchDomainService = new SearchDomainService(distanceCalculatorService, searchService);
     searchController = new SearchController(searchDomainService);
   });
 
   describe('createSearch', () => {
     const createSearchRequest = {
-      sourceAddress: 'Avenida Paulista, 1000',
-      destinationAddress: 'Avenida do Guacá, 63'
+      source: 'Avenida Paulista, 1000',
+      destination: 'Avenida do Guacá, 63'
     };
     it('should return the calculated distance', async () => {
       const result = 12;
@@ -33,16 +36,16 @@ describe('SearchController', () => {
     });
   });
 
-  // describe('getSearchHistory', () => {
-  //   it('should return the search history', async () => {
-  //     const result = [{
-  //       sourceAddress: 'source',
-  //       destinationAddress: 'destination',
-  //       distance: 12,
-  //   }];
-  //     jest.spyOn(searchService, 'findAllSearches').mockImplementation(() => Promise.resolve(result));
+  describe('getSearchHistory', () => {
+    it('should return the search history', async () => {
+      const result = [{
+        source: 'source',
+        destination: 'destination',
+        distance: 12,
+    }];
+      jest.spyOn(searchService, 'findAll').mockImplementation(() => result);
 
-  //     expect(await searchController.getSearchHistory()).toBe(result);
-  //   });
-  // });
+      expect(await searchController.getSearchHistory()).toBe(result);
+    });
+  });
 });

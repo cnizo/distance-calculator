@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+      function customSubmit () {
+        $.ajax({
+            type: "POST",
+            url: "/search",
+            data: $("#distance-form").serialize(),
+            success: function(data) {
+              alert(`Distance is ${data.distance} km`);
+            },
+            error: function(data) {
+              alert(`Something unexpected happened: ${data.responseJSON.message}`);
+            }
+          });
+      }
+    </script>
+    <meta charset="utf-8" />
+    <title>App</title>
+  </head>
+  <body>
+    <div>
+      Search for distance in Km: 
+    </div>
+    <br>
+    <form id="distance-form">
+      <label for="source">Source address:</label>
+      <input type="text" id="source" name="source"><br><br>
+      <label for="destination">Destination address:</label>
+      <input type="text" id="destination" name="destination"><br><br>
+    </form>
+    <p>
+      <button id="on-btn" type="button" onclick="customSubmit()">Submit</button>
+    </p>
+    <div id="result">
+
+    </div>
+  </body>
+</html>

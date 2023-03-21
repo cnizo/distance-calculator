@@ -11,16 +11,16 @@ export class SearchDomainService {
     private readonly searchService: SearchService,
   ) {}
 
-  async createSearch(sourceAddress: string, destinationAddress: string): Promise<number | undefined> {
+  async createSearch(source: string, destination: string): Promise<number | undefined> {
     const distance = await this.distanceCalculatorService.calculateDistance(
-      sourceAddress,
-      destinationAddress
+      source,
+      destination
     );
-    this.searchService.create({sourceAddress, destinationAddress, distance});
+    this.searchService.create({source, destination, distance});
     return distance;
   }
 
-  async findAllSearches(): Promise<SearchDto[]> {
-    return await this.searchService.findAll();
+  findAllSearches(): SearchDto[] {
+    return this.searchService.findAll();
   }
 }

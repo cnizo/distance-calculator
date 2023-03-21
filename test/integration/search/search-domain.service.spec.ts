@@ -2,6 +2,7 @@ import { Test } from '@nestjs/testing';
 import { DistanceCalculatorService } from '../../../src/search/distance-calcualator.service';
 import { SearchDomainService } from '../../../src/search/search.domain.service';
 import { GeoreferenceGatewayService } from '../../../src/georeference-gateway/georeference-gateway.service';
+import { SearchService } from '../../../src/search/entity/search.service';
 
 describe('SearchDomainService', () => {
   let searchDomainService: SearchDomainService;
@@ -9,7 +10,7 @@ describe('SearchDomainService', () => {
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [SearchDomainService, DistanceCalculatorService, GeoreferenceGatewayService],
+      providers: [SearchDomainService, DistanceCalculatorService, GeoreferenceGatewayService, SearchService],
     }).compile();
 
     searchDomainService = moduleRef.get<SearchDomainService>(SearchDomainService);
