@@ -1,5 +1,5 @@
 import { Test } from '@nestjs/testing';
-import { DistanceCalculatorService } from '../../../src/search/distance-calcualator.service';
+import { DistanceCalculatorService } from '../../../src/search/distance-calculator.service';
 import { SearchDomainService } from '../../../src/search/search.domain.service';
 import { GeoreferenceGatewayService } from '../../../src/georeference-gateway/georeference-gateway.service';
 import { SearchService } from '../../../src/search/entity/search.service';

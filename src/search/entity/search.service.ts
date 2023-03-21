@@ -1,30 +1,27 @@
+import { Model } from 'mongoose';
 import { Injectable, Logger } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { InjectModel } from '@nestjs/mongoose';
 import { SearchDto } from '../search.dto';
+import { Search, SearchDocument } from './search.schema';
 
 @Injectable()
 export class SearchService {
-  _SEARCH_HISTORY: SearchDto[];
 
   constructor(
-    // @InjectRepository(Search)
-    // private searchRepository: Repository<Search>,
-  ) {
-    this._SEARCH_HISTORY = [];
-  }
+    @InjectModel(Search.name) private searchModel: Model<SearchDocument>
+  ) {}
 
   async create(search: SearchDto): Promise<void> {
     const searchDomainToSearch = {...search};
     try {
-      this._SEARCH_HISTORY.push(searchDomainToSearch)
-      // return this.searchRepository.create(searchDomainToSearch);
+      const createdSearch = new this.searchModel(searchDomainToSearch);
+      createdSearch.save();
     } catch (e) {
       Logger.error('Error on saving new search to db', e)
     }
   }
 
-  findAll(): SearchDto[] {
-    return this._SEARCH_HISTORY;
+  async findAll(): Promise<SearchDto[]> {
+    return this.searchModel.find().select('-_id -__v').exec();
   }
 }

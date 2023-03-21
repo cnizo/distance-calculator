@@ -1,5 +1,5 @@
 import { SearchDomainService } from '../../../src/search/search.domain.service';
-import { DistanceCalculatorService } from '../../../src/search/distance-calcualator.service';
+import { DistanceCalculatorService } from '../../../src/search/distance-calculator.service';
 import { GeoreferenceGatewayService } from '../../../src/georeference-gateway/georeference-gateway.service';
 import { SearchController } from '../../../src/search/search.controller';
 import { SearchService } from '../../../src/search/entity/search.service';

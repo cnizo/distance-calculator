@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 
-import { DistanceCalculatorService } from './distance-calcualator.service';
+import { DistanceCalculatorService } from './distance-calculator.service';
 import { SearchDto } from './search.dto';
 import { SearchService } from './entity/search.service';
 
@@ -20,7 +20,7 @@ export class SearchDomainService {
     return distance;
   }
 
-  findAllSearches(): SearchDto[] {
-    return this.searchService.findAll();
+  async findAllSearches(): Promise<SearchDto[]> {
+    return await this.searchService.findAll();
   }
 }

@@ -26,6 +26,7 @@ export class SearchController {
 
   @Get()
   async getSearchHistory(): Promise<SearchDto[]> {
-    return this.searchDomainService.findAllSearches();
+    Logger.log('Requesting data: ')
+    return await this.searchDomainService.findAllSearches();
   }
 }

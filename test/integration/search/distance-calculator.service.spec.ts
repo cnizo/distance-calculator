@@ -1,4 +1,4 @@
-import { DistanceCalculatorService } from '../../../src/search/distance-calcualator.service';
+import { DistanceCalculatorService } from '../../../src/search/distance-calculator.service';
 import { GeoreferenceGatewayService } from '../../../src/georeference-gateway/georeference-gateway.service';
 
 describe('DistanceCalculatorService', () => {
