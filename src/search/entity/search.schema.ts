@@ -13,6 +13,9 @@ export class Search {
 
   @Prop()
   distance: number;
+
+  @Prop()
+  createdAt: Date;
 }
 
 export const SearchSchema = SchemaFactory.createForClass(Search);

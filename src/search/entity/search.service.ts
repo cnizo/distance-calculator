@@ -11,7 +11,7 @@ export class SearchService {
   ) {}
 
   async create(search: SearchDto): Promise<void> {
-    const searchDomainToSearch = { ...search };
+    const searchDomainToSearch = { ...search, createdAt: Date.now() };
     try {
       const createdSearch = new this.searchModel(searchDomainToSearch);
       createdSearch.save();
