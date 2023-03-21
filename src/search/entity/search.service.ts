@@ -6,18 +6,17 @@ import { Search, SearchDocument } from './search.schema';
 
 @Injectable()
 export class SearchService {
-
   constructor(
-    @InjectModel(Search.name) private searchModel: Model<SearchDocument>
+    @InjectModel(Search.name) private searchModel: Model<SearchDocument>,
   ) {}
 
   async create(search: SearchDto): Promise<void> {
-    const searchDomainToSearch = {...search};
+    const searchDomainToSearch = { ...search };
     try {
       const createdSearch = new this.searchModel(searchDomainToSearch);
       createdSearch.save();
     } catch (e) {
-      Logger.error('Error on saving new search to db', e)
+      Logger.error('Error on saving new search to db', e);
     }
   }
 

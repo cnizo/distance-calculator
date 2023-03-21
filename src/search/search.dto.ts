@@ -10,5 +10,5 @@ export class CreateSearchRequestDto {
 }
 
 export class CreateSearchResponseDto {
-    distance?: number;
+  distance?: number;
 }

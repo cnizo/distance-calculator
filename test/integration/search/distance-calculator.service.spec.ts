@@ -7,16 +7,28 @@ describe('DistanceCalculatorService', () => {
 
   beforeEach(() => {
     georeferenceGatewayService = new GeoreferenceGatewayService();
-    distanceCalculatorService = new DistanceCalculatorService(georeferenceGatewayService);
+    distanceCalculatorService = new DistanceCalculatorService(
+      georeferenceGatewayService,
+    );
   });
 
   describe('Calculatte distance', () => {
     it('should return distance', async () => {
-      jest.spyOn(georeferenceGatewayService, 'getGeoReferencing')
-        .mockReturnValueOnce(Promise.resolve({ latitude: 51.5103, longitude: 7.49347 }))
-        .mockReturnValueOnce(Promise.resolve({ latitude: 51.515, longitude: 7.453619 }));
+      jest
+        .spyOn(georeferenceGatewayService, 'getGeoReferencing')
+        .mockReturnValueOnce(
+          Promise.resolve({ latitude: 51.5103, longitude: 7.49347 }),
+        )
+        .mockReturnValueOnce(
+          Promise.resolve({ latitude: 51.515, longitude: 7.453619 }),
+        );
 
-      expect(await distanceCalculatorService.calculateDistance('source', 'destination')).not.toBeUndefined();
+      expect(
+        await distanceCalculatorService.calculateDistance(
+          'source',
+          'destination',
+        ),
+      ).not.toBeUndefined();
     });
   });
 });

@@ -6,12 +6,17 @@ import { getDistance } from 'geolib';
 export class DistanceCalculatorService {
   constructor(private georeferenceGatewayService: GeoreferenceGatewayService) {}
 
-  async calculateDistance(source: string, destination: string): Promise<number | undefined> {
+  async calculateDistance(
+    source: string,
+    destination: string,
+  ): Promise<number | undefined> {
     Logger.log('Starting distance calculation');
-  
-    const sourceGeoPoint = await this.georeferenceGatewayService.getGeoReferencing(source);
-    const destinationGeoPoint = await this.georeferenceGatewayService.getGeoReferencing(destination);
-  
+
+    const sourceGeoPoint =
+      await this.georeferenceGatewayService.getGeoReferencing(source);
+    const destinationGeoPoint =
+      await this.georeferenceGatewayService.getGeoReferencing(destination);
+
     let distanceInKm;
     try {
       if (sourceGeoPoint && destinationGeoPoint) {

@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 import { DistanceCalculatorService } from './distance-calculator.service';
 import { SearchDto } from './search.dto';
@@ -11,12 +11,15 @@ export class SearchDomainService {
     private readonly searchService: SearchService,
   ) {}
 
-  async createSearch(source: string, destination: string): Promise<number | undefined> {
+  async createSearch(
+    source: string,
+    destination: string,
+  ): Promise<number | undefined> {
     const distance = await this.distanceCalculatorService.calculateDistance(
       source,
-      destination
+      destination,
     );
-    this.searchService.create({source, destination, distance});
+    await this.searchService.create({ source, destination, distance });
     return distance;
   }
 
