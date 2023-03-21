@@ -3,7 +3,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { AppModule } from './app.module';
 
-const port = parseInt(process.env.PORT) || 3000;
+const port = process.env.ENVIRONMENT == 'development' ? 3000 : (parseInt(process.env.PORT) || 8080);
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
