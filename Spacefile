@@ -1,0 +1,10 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: distance-calculator
+    src: .
+    engine: nodejs16
+    primary: true
+    run: node dist/main
+    public_routes:
+      - "/*"
