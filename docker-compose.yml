@@ -10,18 +10,18 @@ services:
       - /usr/src/app/node_modules
     ports:
       - 3000:3000
-  #   command: /bin/bash
-  #   depends_on:
-  #     - db
+    command: npm run start:dev
+    depends_on:
+      - db
   
-  # db:
-  #   image: 'postgres:latest'
-  #   container_name: db
-  #   ports:
-  #     - 5432:5432
-  #   environment:
-  #     POSTGRES_USER: user
-  #     POSTGRES_PASSWORD: password
-  #     POSTGRES_DB: postgres
-  #   volumes:
-  #     - ./docker/data/:/var/lib/postgresql/data/
+  db:
+    image: 'postgres:latest'
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    volumes:
+      - ./docker/data/:/var/lib/postgresql/data/
