@@ -20,7 +20,7 @@ export class DistanceCalculatorService {
     let distanceInKm;
     try {
       if (sourceGeoPoint && destinationGeoPoint) {
-        distanceInKm = getDistance(sourceGeoPoint, destinationGeoPoint) / 1000;
+        distanceInKm = (getDistance(sourceGeoPoint, destinationGeoPoint) / 1000).toFixed(2);
         Logger.log(`Distance in km is ${distanceInKm}`);
       }
     } catch (e) {

@@ -21,6 +21,6 @@ export class SearchService {
   }
 
   async findAll(): Promise<SearchDto[]> {
-    return this.searchModel.find().select('-_id -__v').exec();
+    return this.searchModel.find().sort('-createdAt').select('-_id -__v').exec();
   }
 }
