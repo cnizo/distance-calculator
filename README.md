@@ -23,7 +23,7 @@ If not, just run:
 $ docker-compose up
 ```
 
-The app will be available on localhost:3000
+The app will be available on localhost:3000.
 
 ## Using the app
  
