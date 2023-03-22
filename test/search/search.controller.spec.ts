@@ -1,8 +1,8 @@
 import { Test } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
-import { SearchDomainService } from '../../../src/search/search.domain.service';
-import { SearchController } from '../../../src/search/search.controller';
-import { SearchModule } from '../../../src/search/search.module';
+import { SearchDomainService } from '../../src/search/search.domain.service';
+import { SearchController } from '../../src/search/search.controller';
+import { SearchModule } from '../../src/search/search.module';
 
 describe('SearchController', () => {
   let searchController: SearchController;

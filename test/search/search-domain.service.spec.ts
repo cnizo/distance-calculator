@@ -1,9 +1,9 @@
 import { Test } from '@nestjs/testing';
 import { getModelToken } from '@nestjs/mongoose';
-import { DistanceCalculatorService } from '../../../src/search/distance-calculator.service';
-import { SearchDomainService } from '../../../src/search/search.domain.service';
-import { GeoreferenceGatewayService } from '../../../src/georeference-gateway/georeference-gateway.service';
-import { SearchService } from '../../../src/search/entity/search.service';
+import { DistanceCalculatorService } from '../../src/search/distance-calculator.service';
+import { SearchDomainService } from '../../src/search/search.domain.service';
+import { GeoreferenceGatewayService } from '../../src/georeference-gateway/georeference-gateway.service';
+import { SearchService } from '../../src/search/entity/search.service';
 
 describe('SearchDomainService', () => {
   let searchDomainService: SearchDomainService;
